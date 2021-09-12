@@ -11,7 +11,7 @@ body {
 }
 
 body::-webkit-scrollbar {
-    width: 15px;
+    width: 10px;
 }
 
 body::-webkit-scrollbar-track {
@@ -31,8 +31,25 @@ body::-webkit-scrollbar-thumb:hover {
 header {
     background-color: #373b69;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     padding: 1rem;
+}
+
+.discover {
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+.discover:hover {
+    color: red;
+}
+
+.active {
+    color: red;
+}
+
+.header-discover {
+    margin-left: 5rem;
 }
 
 .search {

@@ -1,42 +1,32 @@
 import "./App.css";
 import Movie from "./Components/Movie";
-import {baseApi,searchApi} from './Lib/services';
-import {useEffect,useState} from 'react';
+import { getDiscover, getGenre } from './Lib/services';
+import { useEffect, useState } from 'react';
+import Header from './Components/Header';
+
 function App() {
-    const [movies,setMovies]=useState([])
-    const [serchText,setSearchText]=useState('')
-    useEffect( ()=>{
+    const [movies, setMovies] = useState([])
+    const [discover, setDiscover] = useState("popular")
+    useEffect(() => {
         getMovies();
-    },[])
-    const getMovies=async () =>{
-         const movie= await baseApi();
-         setMovies(movie)
+        getGenre();
+    }, [discover])
+
+    const getMovies = async () => {
+        const movie = await getDiscover(discover);
+        setMovies(movie)
     }
-    const handleOnSubmit=async (e)=>{
-        e.preventDefault();
-        if(serchText){
-            const searchData= await searchApi(serchText);
-             setMovies(searchData)
-             setSearchText("")
-        }
-    }
-    const handleOnChange= (e)=>{
-       setSearchText(e.target.value)
-    }
-    return ( 
+
+    return (
         <>
-        <header>
-            <form onSubmit={handleOnSubmit}>
-                <input value={serchText} onChange={handleOnChange} className="search" type="search" placeholder="Search.."/>
-            </form>
-        </header>
-        <div className="movie-container" >
-            {
-            movies.length>0 && movies.map((movie)=>
-                <Movie key={movie.id} {...movie} />
-            )
-            }
-        </div>
+            <Header discover={discover} setMovies={setMovies} setDiscover={setDiscover} />
+            <div className="movie-container" >
+                {
+                    movies.length > 0 && movies.map((movie) =>
+                        <Movie key={movie.id} {...movie} />
+                    )
+                }
+            </div>
         </>
     );
 }
