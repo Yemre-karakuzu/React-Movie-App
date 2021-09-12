@@ -1,10 +1,11 @@
 import axios from "axios";
 import { base_url, api_key } from "./api-base";
 
-async function getDiscover(keyword) {
+async function getDiscover(keyword, genre = "") {
     const apiUrl = `${base_url}/movie/${keyword}?api_key=${api_key}&language=en-US&page=1`;
+    // const apiUrl = `${base_url}/movie/${keyword}?api_key=${api_key}&language=en-US&page=1&with_genres=${genre}`;
     const { data } = await axios(apiUrl);
-    return data.results;
+    return data;
 }
 
 async function searchApi(quary) {

@@ -1,11 +1,13 @@
 import "./App.css";
+import Header from './Components/Header';
 import Movie from "./Components/Movie";
+import Footer from "./Components/Footer";
 import { getDiscover, getGenre } from './Lib/services';
 import { useEffect, useState } from 'react';
-import Header from './Components/Header';
 
 function App() {
     const [movies, setMovies] = useState([])
+    const [page, setPage] = useState([])
     const [discover, setDiscover] = useState("popular")
     useEffect(() => {
         getMovies();
@@ -14,7 +16,9 @@ function App() {
 
     const getMovies = async () => {
         const movie = await getDiscover(discover);
-        setMovies(movie)
+        console.log("movie", movie)
+        setPage(movie.total_pages)
+        setMovies(movie.results)
     }
 
     return (
@@ -27,6 +31,7 @@ function App() {
                     )
                 }
             </div>
+            <Footer />
         </>
     );
 }

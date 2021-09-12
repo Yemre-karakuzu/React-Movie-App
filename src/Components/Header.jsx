@@ -4,7 +4,8 @@ import { searchApi, getGenre } from '../Lib/services';
 function Header({ discover, setMovies, setDiscover }) {
     useEffect(() => {
         getGenreFunc()
-    })
+        console.log("asd")
+    }, [])
     const [serchText, setSearchText] = useState('')
     const [genre, setGenre] = useState([])
     const handleOnSubmit = async (e) => {
